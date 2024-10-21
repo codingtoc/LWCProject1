@@ -1,10 +1,13 @@
 <template>
   <lightning-layout class="slds-p-around_medium">
     <lightning-layout-item size="8">
-      <lightning-input label="Enter account name"></lightning-input>
+      <lightning-input
+        label="Enter account name"
+        onchange={handleChange}
+      ></lightning-input>
     </lightning-layout-item>
     <lightning-layout-item class="slds-m-top_large slds-m-left_medium">
-      <lightning-button label="Search"></lightning-button>
+      <lightning-button label="Search" onclick={handleClick}></lightning-button>
     </lightning-layout-item>
   </lightning-layout>
 </template>
