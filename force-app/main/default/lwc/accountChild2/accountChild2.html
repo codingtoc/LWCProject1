@@ -1,1 +1,11 @@
-<template>{searchTextChild2}</template>
+<template>
+  {searchTextChild2} {currentId} {currentName}
+  <lightning-datatable
+    key-field=""
+    data={rows}
+    columns={columns}
+    hide-checkbox-column="true"
+    show-row-number-column="true"
+    onrowaction={handleRowAction}
+  ></lightning-datatable>
+</template>
