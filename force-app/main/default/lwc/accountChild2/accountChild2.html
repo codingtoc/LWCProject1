@@ -1,8 +1,8 @@
 <template>
-  {searchTextChild2} {currentId} {currentName}
+  {currentId} {currentName}
   <lightning-datatable
     key-field=""
-    data={rows}
+    data={accountRecords.data}
     columns={columns}
     hide-checkbox-column="true"
     show-row-number-column="true"
