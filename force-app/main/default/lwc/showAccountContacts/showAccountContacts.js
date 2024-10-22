@@ -13,6 +13,8 @@ export default class ShowAccountContacts extends LightningElement {
   contacts;
   hasContacts;
   isAccountSelected = false;
+  isAddContactClicked = false;
+  isEditClicked = false;
 
   @wire(MessageContext)
   messageContext;
@@ -52,5 +54,21 @@ export default class ShowAccountContacts extends LightningElement {
   handleUnsubscribe() {
     unsubscribe(this.subscription);
     this.subscription = null;
+  }
+
+  handleAddContact(event) {
+    this.isAddContactClicked = true;
+  }
+
+  handleAddContactCancel(event) {
+    this.isAddContactClicked = false;
+  }
+
+  handleEdit(event) {
+    this.isEditClicked = true;
+  }
+
+  handleEditCancel(event) {
+    this.isEditClicked = false;
   }
 }
