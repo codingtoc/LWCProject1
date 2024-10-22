@@ -12,6 +12,7 @@ export default class ShowAccountContacts extends LightningElement {
   title = "Contacts";
   contacts;
   hasContacts;
+  isAccountSelected = false;
 
   @wire(MessageContext)
   messageContext;
@@ -41,6 +42,7 @@ export default class ShowAccountContacts extends LightningElement {
   async getContacts() {
     this.contacts = await getAccountContacts({ accountId: this.accountId });
     this.hasContacts = this.contacts.length > 0 ? true : false;
+    this.isAccountSelected = true;
   }
 
   handleChange(event) {
