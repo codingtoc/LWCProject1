@@ -1,4 +1,5 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, wire } from "lwc";
+import getAccounts from "@salesforce/apex/AccountClass.getAccounts";
 
 export default class AccountChild2 extends LightningElement {
   @api searchTextChild2;
@@ -20,6 +21,9 @@ export default class AccountChild2 extends LightningElement {
     { Id: "33", Name: "Yogesh Handge", Actions: "" },
     { Id: "40", Name: "Manish Jansari", Actions: "" }
   ];
+
+  @wire(getAccounts, { searchTextClass: "$searchTextChild2" })
+  accountRecords;
 
   currentId;
   currentName;
