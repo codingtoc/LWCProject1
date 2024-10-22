@@ -1,14 +1,38 @@
 <template>
   <lightning-card title={title}>
     <template if:true={isAccountSelected}>
+      <lightning-button-icon
+        icon-name="utility:adduser"
+        variant="brand"
+        alternative-text="Add Contact"
+        class="slds-m-left_xx-small"
+        title="Add Contact"
+      ></lightning-button-icon>
       <template if:true={hasContacts}>
         <template for:each={contacts} for:item="contact">
           <lightning-layout
             key={contact.Id}
             class="slds-box slds-m-around_small"
+            vertical-align="center"
           >
-            <lightning-layout-item>
+            <lightning-layout-item size="8">
               <b>{contact.Name}</b>
+            </lightning-layout-item>
+            <lightning-layout-item size="4">
+              <lightning-button-icon
+                icon-name="utility:edit"
+                variant="brand"
+                alternative-text="Edit"
+                class="slds-m-left_xx-small"
+                title="Edit"
+              ></lightning-button-icon>
+              <lightning-button-icon
+                icon-name="utility:delete"
+                variant="brand"
+                alternative-text="Delete"
+                class="slds-m-left_xx-small"
+                title="Delete"
+              ></lightning-button-icon>
             </lightning-layout-item>
           </lightning-layout>
         </template>
