@@ -6,6 +6,7 @@ import {
 } from "lightning/messageService";
 import Comrevo from "@salesforce/messageChannel/Comrevo__c";
 import getAccountContacts from "@salesforce/apex/AccountClass.getAccountContacts";
+import LightningConfirm from "lightning/confirm";
 
 export default class ShowAccountContacts extends LightningElement {
   subscription = null;
@@ -79,5 +80,14 @@ export default class ShowAccountContacts extends LightningElement {
     this.isAddContactClicked = false;
     this.isEditClicked = false;
     this.getContacts();
+  }
+
+  async handleDelete(event) {
+    const result = await LightningConfirm.open({
+      message: "Are you sure you want to delete contact?",
+      variant: "headerless",
+      label: "this is the aria-label value"
+      // setting theme would have no effect
+    });
   }
 }
