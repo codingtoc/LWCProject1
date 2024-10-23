@@ -7,6 +7,7 @@ import {
 import Comrevo from "@salesforce/messageChannel/Comrevo__c";
 import getAccountContacts from "@salesforce/apex/AccountClass.getAccountContacts";
 import LightningConfirm from "lightning/confirm";
+import { deleteRecord } from "lightning/uiRecordApi";
 
 export default class ShowAccountContacts extends LightningElement {
   subscription = null;
@@ -83,11 +84,17 @@ export default class ShowAccountContacts extends LightningElement {
   }
 
   async handleDelete(event) {
+    this.editableContactId = event.target.dataset.contactId;
     const result = await LightningConfirm.open({
       message: "Are you sure you want to delete contact?",
       variant: "headerless",
       label: "this is the aria-label value"
       // setting theme would have no effect
     });
+
+    if (result) {
+      let deleteResult = await deleteRecord(this.editableContactId);
+      this.getContacts();
+    }
   }
 }
