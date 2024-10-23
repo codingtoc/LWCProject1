@@ -1,4 +1,4 @@
-import { LightningElement, wire } from "lwc";
+import { LightningElement, wire, api } from "lwc";
 import {
   MessageContext,
   subscribe,
@@ -15,6 +15,8 @@ export default class ShowAccountContacts extends LightningElement {
   isAccountSelected = false;
   isAddContactClicked = false;
   isEditClicked = false;
+  @api recordId;
+  editableContactId;
 
   @wire(MessageContext)
   messageContext;
@@ -66,9 +68,16 @@ export default class ShowAccountContacts extends LightningElement {
 
   handleEdit(event) {
     this.isEditClicked = true;
+    this.editableContactId = event.target.dataset.contactId;
   }
 
   handleEditCancel(event) {
     this.isEditClicked = false;
+  }
+
+  handleSuccess(event) {
+    this.isAddContactClicked = false;
+    this.isEditClicked = false;
+    this.getContacts();
   }
 }
