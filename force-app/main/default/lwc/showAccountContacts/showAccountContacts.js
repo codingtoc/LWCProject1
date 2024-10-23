@@ -8,6 +8,7 @@ import Comrevo from "@salesforce/messageChannel/Comrevo__c";
 import getAccountContacts from "@salesforce/apex/AccountClass.getAccountContacts";
 import LightningConfirm from "lightning/confirm";
 import { deleteRecord } from "lightning/uiRecordApi";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class ShowAccountContacts extends LightningElement {
   subscription = null;
@@ -95,6 +96,15 @@ export default class ShowAccountContacts extends LightningElement {
     if (result) {
       let deleteResult = await deleteRecord(this.editableContactId);
       this.getContacts();
+      this.showToast();
     }
+  }
+
+  showToast() {
+    const event = new ShowToastEvent({
+      title: "Delete Contact",
+      message: "Contact is deleted successfully"
+    });
+    this.dispatchEvent(event);
   }
 }
