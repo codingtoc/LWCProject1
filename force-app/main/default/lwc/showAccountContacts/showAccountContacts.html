@@ -169,5 +169,11 @@
       </section>
       <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
     </template>
+    <template if:true={processing}>
+      <lightning-spinner
+        alternative-text="Loading"
+        size="small"
+      ></lightning-spinner>
+    </template>
   </lightning-card>
 </template>

@@ -20,6 +20,7 @@ export default class ShowAccountContacts extends LightningElement {
   isEditClicked = false;
   @api recordId;
   editableContactId;
+  processing = false;
 
   @wire(MessageContext)
   messageContext;
@@ -47,9 +48,11 @@ export default class ShowAccountContacts extends LightningElement {
   }
 
   async getContacts() {
+    this.processing = true;
     this.contacts = await getAccountContacts({ accountId: this.accountId });
     this.hasContacts = this.contacts.length > 0 ? true : false;
     this.isAccountSelected = true;
+    this.processing = false;
   }
 
   handleChange(event) {
@@ -94,9 +97,11 @@ export default class ShowAccountContacts extends LightningElement {
     });
 
     if (result) {
+      this.processing = true;
       let deleteResult = await deleteRecord(this.editableContactId);
       this.getContacts();
       this.showToast();
+      this.processing = false;
     }
   }
 
