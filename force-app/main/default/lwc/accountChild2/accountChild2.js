@@ -4,7 +4,8 @@ import { MessageContext, publish } from "lightning/messageService";
 import Comrevo from "@salesforce/messageChannel/Comrevo__c";
 
 export default class AccountChild2 extends LightningElement {
-  @api searchTextChild2;
+  // @api searchTextChild2;
+  _searchTextChild2;
 
   @wire(MessageContext)
   messageContext;
@@ -27,11 +28,13 @@ export default class AccountChild2 extends LightningElement {
     { Id: "40", Name: "Manish Jansari", Actions: "" }
   ];
 
-  @wire(getAccounts, { searchTextClass: "$searchTextChild2" })
+  // @wire(getAccounts, { searchTextClass: "$searchTextChild2" })
   accountRecords;
 
   currentId;
   currentName;
+
+  processing = false;
 
   handleRowAction(event) {
     if (event.detail.action.value === "view_contacts") {
@@ -45,5 +48,22 @@ export default class AccountChild2 extends LightningElement {
 
       publish(this.messageContext, Comrevo, payload);
     }
+  }
+
+  @api
+  get searchTextChild2() {
+    return this._searchTextChild2;
+  }
+  set searchTextChild2(value) {
+    this._searchTextChild2 = value;
+    this.getAccountList();
+  }
+
+  async getAccountList() {
+    this.processing = true;
+    this.accountRecords = await getAccounts({
+      searchTextClass: this.searchTextChild2
+    });
+    this.processing = false;
   }
 }

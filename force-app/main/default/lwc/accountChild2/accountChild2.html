@@ -1,14 +1,18 @@
 <template>
-  <template if:true={accountRecords}>
-    <div style="height: 300px">
-      <lightning-datatable
-        key-field=""
-        data={accountRecords.data}
-        columns={columns}
-        hide-checkbox-column="true"
-        show-row-number-column="true"
-        onrowaction={handleRowAction}
-      ></lightning-datatable>
-    </div>
+  <div style="height: 300px">
+    <lightning-datatable
+      key-field=""
+      data={accountRecords}
+      columns={columns}
+      hide-checkbox-column="true"
+      show-row-number-column="true"
+      onrowaction={handleRowAction}
+    ></lightning-datatable>
+  </div>
+  <template if:true={processing}>
+    <lightning-spinner
+      alternative-text="Loading"
+      size="small"
+    ></lightning-spinner>
   </template>
 </template>
